@@ -91,6 +91,8 @@ const HeroSection = () => {
                   src="/images/profile.png"
                   alt="Developer Profile"
                   className="w-full h-full object-cover rounded-full"
+                  width={1024}
+                  height={1024}
                 />
               </div>
             </div>

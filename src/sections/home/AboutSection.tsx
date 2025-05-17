@@ -8,11 +8,13 @@ const AboutSection = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
           <div className="relative">
             <div className="w-full h-[400px] md:h-[500px] bg-white p-3 rounded-xl shadow-lg relative z-10">
-              <Image
+              {/* <Image
                 src="https://images.unsplash.com/photo-1629904853716-f0bc54eea481?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80"
                 alt="Developer Working"
                 className="w-full h-full object-cover rounded-lg"
-              />
+                width={500}
+                height={500}
+              /> */}
             </div>
             <div className="absolute bottom-4 right-4 w-36 h-36 bg-primary rounded-lg -z-10"></div>
             <div className="absolute top-4 left-4 w-36 h-36 bg-foreground/10 rounded-lg -z-10"></div>
