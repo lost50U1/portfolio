@@ -1,4 +1,5 @@
 import { Button } from "@/components/ui/button";
+import Image from "next/image";
 
 const HeroSection = () => {
   return (
@@ -12,7 +13,7 @@ const HeroSection = () => {
         <div className="absolute bottom-10 left-10 w-72 h-72 bg-blue-300/20 rounded-full filter blur-3xl" />
       </div>
 
-      <div className="container mx-auto">
+      <div className="container mx-auto max-lg:px-4">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
           <div className="order-2 md:order-1">
             <span className="inline-block bg-primary/10 text-primary px-4 py-1 rounded-full text-sm font-medium mb-6">
@@ -86,7 +87,7 @@ const HeroSection = () => {
             <div className="relative">
               <div className="w-64 h-64 md:w-80 md:h-80 bg-primary/90 rounded-full absolute top-4 left-4 -z-10" />
               <div className="w-64 h-64 md:w-80 md:h-80 bg-white dark:bg-foreground/5 p-2 rounded-full overflow-hidden shadow-lg">
-                <img
+                <Image
                   src="/images/profile.png"
                   alt="Developer Profile"
                   className="w-full h-full object-cover rounded-full"

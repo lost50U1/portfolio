@@ -1,7 +1,7 @@
 import Header from "@/components/common/Header";
-import { FloatingNav } from "@/components/layout/FloatingNavbar";
+// import { FloatingNav } from "@/components/layout/FloatingNavbar";
 import React from "react";
-import { navItems } from "@/data";
+// import { navItems } from "@/data";
 
 export default function Layout({
   children,
@@ -9,7 +9,7 @@ export default function Layout({
   children: React.ReactNode;
 }>) {
   return (
-    <div className="flex flex-col min-h-screen max-lg:px-4">
+    <div className="flex flex-col min-h-screen">
       <Header />
       {/* <FloatingNav navItems={navItems} /> */}
       <main className="flex-grow">{children}</main>

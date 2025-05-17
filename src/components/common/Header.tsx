@@ -2,10 +2,9 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import { Button } from "@/components/ui/button";
+// import { Button } from "@/components/ui/button";
 import { ModeToggle } from "../ModeToggle";
 
-// todo: refactor the code and i dont think i need admin button or link and instead of admin maybe show my profile icon if i logged in
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -36,7 +35,7 @@ const Header = () => {
           href="/"
           className="text-2xl font-heading font-bold text-foreground"
         >
-          Biruk's<span className="text-primary">Portfolio</span>
+          Biruk&apos;s<span className="text-primary">Portfolio</span>
         </Link>
 
         {/* Desktop Navigation */}
