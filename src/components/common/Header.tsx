@@ -5,6 +5,7 @@ import Link from "next/link";
 // import { Button } from "@/components/ui/button";
 import { ModeToggle } from "../ModeToggle";
 
+// todo: add the line animation on the header links get it from the old site
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
