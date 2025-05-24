@@ -4,9 +4,22 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 // import { Button } from "@/components/ui/button";
 import { ModeToggle } from "../ModeToggle";
+import { usePathname } from "next/navigation";
+
+const navItems = [
+  "Home",
+  "About",
+  "Skills",
+  "Experience",
+  "Projects",
+  "Contact",
+];
 
 // todo: add the line animation on the header links get it from the old site
 const Header = () => {
+  const pathname = usePathname();
+  console.log("pathname", pathname);
+
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
@@ -42,23 +55,21 @@ const Header = () => {
         {/* Desktop Navigation */}
         <nav className="hidden md:block">
           <ul className="flex space-x-8">
-            {[
-              "Home",
-              "About",
-              "Skills",
-              "Experience",
-              "Projects",
-              "Contact",
-            ].map((item) => (
-              <li key={item}>
-                <a
-                  href={item === "Home" ? "#" : `#${item.toLowerCase()}`}
-                  className="text-foreground hover:text-primary font-medium transition-colors"
-                >
-                  {item}
-                </a>
-              </li>
-            ))}
+            {navItems.map((item) => {
+              const hash = `#${item.toLowerCase()}`;
+              const href = pathname === "/" ? hash : `/${hash}`;
+
+              return (
+                <li key={item}>
+                  <Link
+                    href={href}
+                    className="text-foreground hover:text-primary font-medium transition-colors"
+                  >
+                    {item}
+                  </Link>
+                </li>
+              );
+            })}
           </ul>
         </nav>
 
@@ -109,24 +120,22 @@ const Header = () => {
       {mobileMenuOpen && (
         <div className="md:hidden absolute top-full left-0 right-0 bg-background border-y border-border shadow-lg py-4 animate-fadeIn px-4">
           <ul className="flex flex-col space-y-3 container">
-            {[
-              "Home",
-              "About",
-              "Skills",
-              "Experience",
-              "Projects",
-              "Contact",
-            ].map((item) => (
-              <li key={item}>
-                <a
-                  href={item === "Home" ? "#" : `#${item.toLowerCase()}`}
-                  className="text-foreground hover:text-primary font-medium transition-colors block py-2"
-                  onClick={() => setMobileMenuOpen(false)}
-                >
-                  {item}
-                </a>
-              </li>
-            ))}
+            {navItems.map((item) => {
+              const hash = `#${item.toLowerCase()}`;
+              const href = pathname === "/" ? hash : `/${hash}`;
+
+              return (
+                <li key={item}>
+                  <Link
+                    href={href}
+                    className="text-foreground hover:text-primary font-medium transition-colors block py-2"
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    {item}
+                  </Link>
+                </li>
+              );
+            })}
           </ul>
         </div>
       )}

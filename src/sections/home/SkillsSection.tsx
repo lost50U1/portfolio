@@ -38,26 +38,19 @@ const SkillsSection = () => {
     ],
   };
 
-  const [activeTab, setActiveTab] = useState<"frontend" | "backend" | "tools">(
-    "frontend"
-  );
-
   return (
     <section className="py-20" id="skills">
       <div className="container mx-auto max-lg:px-4">
         <div className="text-center mb-12">
           <h2 className="section-title">My Skills</h2>
           <p className="text-lg text-foreground/70 max-w-3xl mx-auto">
-            I've worked with a wide range of technologies in the web development
-            world. Here's an overview of my technical skills and competencies.
+            I&apos;ve worked with a wide range of technologies in the web
+            development world. Here&apos;s an overview of my technical skills
+            and competencies.
           </p>
         </div>
 
-        <Tabs
-          defaultValue="frontend"
-          className="w-full max-w-4xl mx-auto"
-          onValueChange={(value) => setActiveTab(value as any)}
-        >
+        <Tabs defaultValue="frontend" className="w-full max-w-4xl mx-auto">
           <div className="flex justify-center mb-8">
             <TabsList className="grid grid-cols-3 w-[400px]">
               <TabsTrigger value="frontend">Frontend</TabsTrigger>
