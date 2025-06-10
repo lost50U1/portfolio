@@ -1,5 +1,6 @@
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 
@@ -235,7 +236,7 @@ export default async function Project({
       <section className="py-12">
         <div className="container mx-auto">
           <div className="rounded-xl shadow-lg">
-            <img
+            <Image
               src={project.image}
               alt={project.title}
               className="w-full h-auto rounded-lg object-cover"

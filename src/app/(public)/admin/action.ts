@@ -17,6 +17,7 @@ export async function login(formData: FormData) {
 
   const { error } = await supabase.auth.signInWithPassword(data);
 
+  // todo: instead of redirecting to error page here use toast to show that the entered credential is incorrect
   if (error) {
     redirect("/error");
   }

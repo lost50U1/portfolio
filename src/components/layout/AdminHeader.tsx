@@ -8,8 +8,8 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Button } from "../ui/button";
-import { Bell, LogOut } from "lucide-react";
-import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
+import { Bell } from "lucide-react";
+import { Avatar, AvatarImage } from "../ui/avatar";
 
 export default function AdminHeader() {
   //   const { user, signOut } = useAuth();
