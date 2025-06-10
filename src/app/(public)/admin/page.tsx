@@ -1,65 +1,66 @@
 "use client";
 
-import React, { useState } from "react";
+import React from "react";
 
-import { useRouter } from "next/navigation";
+// import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import { login } from "./action";
 
 export default function LoginPage() {
-  const router = useRouter();
+  // const router = useRouter();
   //   const { toast } = useToast();
-  const [formData, setFormData] = useState({
-    email: "",
-    password: "",
-  });
-  const [isLoading, setIsLoading] = useState(false);
+  // const [formData, setFormData] = useState({
+  //   email: "",
+  //   password: "",
+  // });
+  // const [isLoading, setIsLoading] = useState(false);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
-  };
+  // const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  //   const { name, value } = e.target;
+  //   setFormData((prev) => ({
+  //     ...prev,
+  //     [name]: value,
+  //   }));
+  // };
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsLoading(true);
+  // const handleSubmit = async (e: React.FormEvent) => {
+  //   e.preventDefault();
+  //   setIsLoading(true);
 
-    try {
-      // In a real app, this would be replaced with a Supabase authentication call
-      await new Promise((resolve) => setTimeout(resolve, 1000));
+  //   try {
+  //     // In a real app, this would be replaced with a Supabase authentication call
+  //     await new Promise((resolve) => setTimeout(resolve, 1000));
 
-      // For demo purposes, we'll just check if the email is "admin@example.com" and password is "password"
-      if (
-        formData.email === "admin@example.com" &&
-        formData.password === "password"
-      ) {
-        // toast({
-        //   title: "Login successful",
-        //   description: "Welcome to the admin dashboard!",
-        // });
-        router.push("/dashboard");
-      } else {
-        // toast({
-        //   title: "Login failed",
-        //   description:
-        //     "Invalid email or password. For demo, use admin@example.com / password",
-        //   variant: "destructive",
-        // });
-      }
-    } catch (error) {
-      //   toast({
-      //     title: "Login failed",
-      //     description: "An error occurred during login.",
-      //     variant: "destructive",
-      //   });
-    } finally {
-      setIsLoading(false);
-    }
-  };
+  //     // For demo purposes, we'll just check if the email is "admin@example.com" and password is "password"
+  //     if (
+  //       formData.email === "admin@example.com" &&
+  //       formData.password === "password"
+  //     ) {
+  //       // toast({
+  //       //   title: "Login successful",
+  //       //   description: "Welcome to the admin dashboard!",
+  //       // });
+  //       router.push("/dashboard");
+  //     } else {
+  //       // toast({
+  //       //   title: "Login failed",
+  //       //   description:
+  //       //     "Invalid email or password. For demo, use admin@example.com / password",
+  //       //   variant: "destructive",
+  //       // });
+  //     }
+  //   } catch (error) {
+  //     //   toast({
+  //     //     title: "Login failed",
+  //     //     description: "An error occurred during login.",
+  //     //     variant: "destructive",
+  //     //   });
+  //   } finally {
+  //     setIsLoading(false);
+  //   }
+  // };
 
   return (
     <div className="py-4">
@@ -80,7 +81,7 @@ export default function LoginPage() {
             </p>
           </div>
 
-          <form onSubmit={handleSubmit} className="space-y-6">
+          <form className="space-y-6">
             <div className="space-y-2">
               <label
                 htmlFor="email"
@@ -92,8 +93,6 @@ export default function LoginPage() {
                 id="email"
                 name="email"
                 type="email"
-                value={formData.email}
-                onChange={handleChange}
                 placeholder="admin@example.com"
                 className="text-foreground bg-background border-input"
                 required
@@ -116,18 +115,16 @@ export default function LoginPage() {
                 id="password"
                 name="password"
                 type="password"
-                value={formData.password}
-                onChange={handleChange}
                 placeholder="password"
                 className="text-foreground bg-background border-input"
                 required
               />
             </div>
 
-            <Button type="submit" className="w-full" disabled={isLoading}>
-              {isLoading ? "Signing in..." : "Sign in"}
+            <Button formAction={login} type="submit" className="w-full">
+              Sign in
             </Button>
-
+            {/* 
             <div className="mt-4 text-center text-sm text-foreground/70">
               <p>
                 Demo credentials: <br />
@@ -136,7 +133,7 @@ export default function LoginPage() {
                 </span>{" "}
                 /<span className="text-primary font-medium"> password</span>
               </p>
-            </div>
+            </div> */}
           </form>
 
           <div className="mt-8 pt-6 border-t border-border text-center text-sm text-foreground/70">
