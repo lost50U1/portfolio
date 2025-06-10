@@ -2,41 +2,9 @@
 
 import { Card, CardContent } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { mockSkillsData } from "@/data/user/mockSkillsData";
 
 const SkillsSection = () => {
-  const skills = {
-    frontend: [
-      { name: "HTML5", level: 90 },
-      { name: "CSS3 / Sass", level: 85 },
-      { name: "JavaScript (ES6+)", level: 90 },
-      { name: "TypeScript", level: 85 },
-      { name: "React", level: 90 },
-      { name: "Next.js", level: 80 },
-      { name: "Tailwind CSS", level: 85 },
-      { name: "Redux", level: 75 },
-    ],
-    backend: [
-      { name: "Node.js", level: 85 },
-      { name: "Express.js", level: 80 },
-      { name: "PostgreSQL", level: 75 },
-      { name: "MongoDB", level: 70 },
-      { name: "Supabase", level: 80 },
-      { name: "Firebase", level: 75 },
-      { name: "RESTful APIs", level: 85 },
-      { name: "GraphQL", level: 70 },
-    ],
-    tools: [
-      { name: "Git & GitHub", level: 85 },
-      { name: "Docker", level: 65 },
-      { name: "CI/CD", level: 70 },
-      { name: "Webpack", level: 65 },
-      { name: "Vite", level: 80 },
-      { name: "Jest", level: 75 },
-      { name: "Cypress", level: 70 },
-      { name: "Figma", level: 60 },
-    ],
-  };
-
   return (
     <section className="py-20" id="skills">
       <div className="container mx-auto max-lg:px-4">
@@ -60,7 +28,7 @@ const SkillsSection = () => {
 
           <TabsContent value="frontend" className="animate-fadeIn">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {skills.frontend.map((skill) => (
+              {mockSkillsData.frontend.map((skill) => (
                 <SkillCard
                   key={skill.name}
                   name={skill.name}
@@ -72,7 +40,7 @@ const SkillsSection = () => {
 
           <TabsContent value="backend" className="animate-fadeIn">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {skills.backend.map((skill) => (
+              {mockSkillsData.backend.map((skill) => (
                 <SkillCard
                   key={skill.name}
                   name={skill.name}
@@ -84,7 +52,7 @@ const SkillsSection = () => {
 
           <TabsContent value="tools" className="animate-fadeIn">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {skills.tools.map((skill) => (
+              {mockSkillsData.tools.map((skill) => (
                 <SkillCard
                   key={skill.name}
                   name={skill.name}

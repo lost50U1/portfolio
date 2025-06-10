@@ -2,18 +2,9 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
-// import { Button } from "@/components/ui/button";
 import { ModeToggle } from "../ModeToggle";
 import { usePathname } from "next/navigation";
-
-const navItems = [
-  "Home",
-  "About",
-  "Skills",
-  "Experience",
-  "Projects",
-  "Contact",
-];
+import { navItems } from "@/data";
 
 // todo: add the line animation on the header links get it from the old site
 const Header = () => {

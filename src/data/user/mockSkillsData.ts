@@ -1,0 +1,32 @@
+export const mockSkillsData = {
+  frontend: [
+    { name: "HTML5", level: 90 },
+    { name: "CSS3 / Sass", level: 85 },
+    { name: "JavaScript (ES6+)", level: 90 },
+    { name: "TypeScript", level: 85 },
+    { name: "React", level: 90 },
+    { name: "Next.js", level: 80 },
+    { name: "Tailwind CSS", level: 85 },
+    { name: "Redux", level: 75 },
+  ],
+  backend: [
+    { name: "Node.js", level: 85 },
+    { name: "Express.js", level: 80 },
+    { name: "PostgreSQL", level: 75 },
+    { name: "MongoDB", level: 70 },
+    { name: "Supabase", level: 80 },
+    { name: "Firebase", level: 75 },
+    { name: "RESTful APIs", level: 85 },
+    { name: "GraphQL", level: 70 },
+  ],
+  tools: [
+    { name: "Git & GitHub", level: 85 },
+    { name: "Docker", level: 65 },
+    { name: "CI/CD", level: 70 },
+    { name: "Webpack", level: 65 },
+    { name: "Vite", level: 80 },
+    { name: "Jest", level: 75 },
+    { name: "Cypress", level: 70 },
+    { name: "Figma", level: 60 },
+  ],
+};

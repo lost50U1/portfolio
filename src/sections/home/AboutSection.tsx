@@ -57,7 +57,11 @@ const AboutSection = () => {
                 </p>
               </div>
             </div>
-            <a href="/resume.pdf" target="_blank" rel="noopener noreferrer">
+            <a
+              href="/pdfs/resume.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               <Button>Download Resume</Button>
             </a>
           </div>
