@@ -4,6 +4,8 @@ import { SidebarProvider } from "@/components/ui/sidebar";
 import Sidebar from "@/components/layout/Sidebar";
 import AdminHeader from "@/components/layout/AdminHeader";
 
+// todo: add the protected route logic i think the middleware only is not enough
+
 export default function DashboardLayout({
   children,
 }: Readonly<{
