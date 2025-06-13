@@ -10,7 +10,7 @@ import { useQueryClient } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { loginSchema } from "@/schemas/auth/login.schema";
-import { z } from "zod";
+import { z } from "zod/v4";
 import { login } from "@/app/(public)/admin/action";
 import { toast } from "sonner";
 import {
