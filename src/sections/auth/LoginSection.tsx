@@ -5,7 +5,7 @@ import React, { useTransition } from "react";
 import Link from "next/link";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useQueryClient } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -13,11 +13,23 @@ import { loginSchema } from "@/schemas/auth/login.schema";
 import { z } from "zod";
 import { login } from "@/app/(public)/admin/action";
 import { toast } from "sonner";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
+import { Loader2 } from "lucide-react";
 
 export const LoginSection = () => {
   const [isPending, startTransition] = useTransition();
+  const searchParams = useSearchParams();
   const router = useRouter();
   const queryClient = useQueryClient();
+
+  const redirectTo = searchParams.get("redirect") || "/dashboard";
 
   const form = useForm<z.infer<typeof loginSchema>>({
     resolver: zodResolver(loginSchema),
@@ -27,20 +39,20 @@ export const LoginSection = () => {
     },
   });
 
-  const handleLogin = async (values: z.infer<typeof loginSchema>) => {
+  async function onSubmit(values: z.infer<typeof loginSchema>) {
     startTransition(async () => {
       const response = await login(values);
 
       if (response.error) {
-        toast.error("Something went wrong with your creditials!");
+        toast.error(response.error);
         return;
       }
 
       queryClient.invalidateQueries({ queryKey: ["user"] });
-      router.push("/dashboard");
+      router.push(redirectTo);
       toast.success("Welcome Back!");
     });
-  };
+  }
 
   return (
     <div className="bg-background dark:bg-card border-border w-full max-w-md rounded-xl border p-8 shadow-lg">
@@ -57,50 +69,60 @@ export const LoginSection = () => {
         </p>
       </div>
 
-      <form onSubmit={handleLogin} className="space-y-6">
-        <div className="space-y-2">
-          <label
-            htmlFor="email"
-            className="text-foreground text-sm font-medium"
-          >
-            Email
-          </label>
-          <Input
-            id="email"
-            name="email"
-            type="email"
-            placeholder="admin@example.com"
-            className="text-foreground bg-background border-input"
-            required
-          />
-        </div>
+      <Form {...form}>
+        <form onSubmit={form.handleSubmit(onSubmit)}>
+          <div className="space-y-6">
+            <FormField
+              control={form.control}
+              name="email"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Email</FormLabel>
+                  <FormControl>
+                    <Input
+                      placeholder="admin@example.com"
+                      type="email"
+                      {...field}
+                      disabled={isPending}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
 
-        <div className="space-y-2">
-          <div className="flex items-center justify-between">
-            <label
-              htmlFor="password"
-              className="text-foreground text-sm font-medium"
-            >
-              Password
-            </label>
-            <a href="#" className="text-primary text-sm hover:underline">
-              Forgot password?
-            </a>
+            <FormField
+              control={form.control}
+              name="password"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Password</FormLabel>
+                  <FormControl>
+                    <Input
+                      placeholder="password"
+                      type="password"
+                      {...field}
+                      disabled={isPending}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
+            <Button type="submit" className="w-full" disabled={isPending}>
+              {isPending ? (
+                <div className="flex items-center justify-center gap-1">
+                  <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                  <span>Signing in...</span>
+                </div>
+              ) : (
+                "Sign In"
+              )}
+            </Button>
           </div>
-          <Input
-            id="password"
-            name="password"
-            type="password"
-            placeholder="password"
-            className="text-foreground bg-background border-input"
-            required
-          />
-        </div>
-
-        <Button type="submit" className="w-full">
-          Sign in
-        </Button>
-      </form>
+        </form>
+      </Form>
 
       <div className="border-border text-foreground/70 mt-8 border-t pt-6 text-center text-sm">
         <Link href="/" className="text-primary hover:underline">
