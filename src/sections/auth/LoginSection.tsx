@@ -7,7 +7,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useQueryClient } from "@tanstack/react-query";
-import { useForm } from "react-hook-form";
+import { useForm, Resolver } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { loginSchema } from "@/schemas/auth/login.schema";
 import { z } from "zod";
@@ -31,8 +31,10 @@ export const LoginSection = () => {
 
   const redirectTo = searchParams.get("redirect") || "/dashboard";
 
-  const form = useForm<z.infer<typeof loginSchema>>({
-    resolver: zodResolver(loginSchema),
+  type LoginSchemaType = z.infer<typeof loginSchema>;
+
+  const form = useForm<LoginSchemaType>({
+    resolver: zodResolver(loginSchema) as Resolver<LoginSchemaType>,
     defaultValues: {
       email: "",
       password: "",
