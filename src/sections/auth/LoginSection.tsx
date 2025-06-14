@@ -9,7 +9,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { useQueryClient } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-// import { loginSchema } from "@/schemas/auth/login.schema";
+import { loginSchema } from "@/schemas/auth/login.schema";
 import { z } from "zod";
 import { login } from "@/app/(public)/admin/action";
 import { toast } from "sonner";
@@ -22,17 +22,6 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Loader2 } from "lucide-react";
-
-const loginSchema = z.object({
-  email: z
-    .string({ required_error: "email is required" })
-    .email({ message: "invalid email format" })
-    .min(11),
-  password: z
-    .string()
-    .min(8, { message: "Password must be at least 8 characters long" })
-    .regex(/\d/, { message: "Password must include at least one number" }),
-});
 
 export const LoginSection = () => {
   const [isPending, startTransition] = useTransition();
