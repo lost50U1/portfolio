@@ -1,6 +1,7 @@
 "use server";
 
 import { createClient } from "@/lib/supabase/server";
+import { UserResponse } from "@/types";
 
 export async function login(formData: { email: string; password: string }) {
   const supabase = await createClient();
@@ -17,13 +18,27 @@ export async function login(formData: { email: string; password: string }) {
   return { user: data.user, session: data.session };
 }
 
-export async function logout() {
+export async function logout(): Promise<{ success: boolean; error?: string }> {
   const supabase = await createClient();
   const { error } = await supabase.auth.signOut();
 
   if (error) {
-    return { error: error.message };
+    return { success: false, error: error.message };
   }
 
-  return;
+  return { success: true, error: undefined };
+}
+
+export async function getUser(): Promise<UserResponse> {
+  const supabase = await createClient();
+  const {
+    data: { user },
+    error,
+  } = await supabase.auth.getUser();
+
+  if (error || !user) {
+    return { user: null, error: error?.message || "User not signed in" };
+  }
+
+  return { user, error: undefined };
 }
