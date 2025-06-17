@@ -1,3 +1,5 @@
+"use client";
+
 import React from "react";
 import { Activity, Users, BarChart, Layers, Eye } from "lucide-react";
 import { VisitorsChart } from "@/components/dashboard/VisitorsChart";
