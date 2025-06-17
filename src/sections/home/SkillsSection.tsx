@@ -1,25 +1,43 @@
 "use client";
 
+import { fetchSkills } from "@/api/services/skills";
 import { Card, CardContent } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { mockSkillsData } from "@/data/user/mockSkillsData";
+import { useQuery } from "@tanstack/react-query";
 
 const SkillsSection = () => {
+  // Fetch skills data
+  const {
+    data: skills = [],
+    isLoading,
+    error,
+  } = useQuery({
+    queryKey: ["skills"],
+    queryFn: fetchSkills,
+  });
+
+  // Filter skills by category
+  const frontendSkills = skills.filter(
+    (skill) => skill.category === "Frontend",
+  );
+  const backendSkills = skills.filter((skill) => skill.category === "Backend");
+  const toolsSkills = skills.filter((skill) => skill.category === "Tools");
+
   return (
     <section className="py-20" id="skills">
       <div className="container mx-auto max-lg:px-4">
-        <div className="text-center mb-12">
+        <div className="mb-12 text-center">
           <h2 className="section-title">My Skills</h2>
-          <p className="text-lg text-foreground/70 max-w-3xl mx-auto">
+          <p className="text-foreground/70 mx-auto max-w-3xl text-lg">
             I&apos;ve worked with a wide range of technologies in the web
             development world. Here&apos;s an overview of my technical skills
             and competencies.
           </p>
         </div>
 
-        <Tabs defaultValue="frontend" className="w-full max-w-4xl mx-auto">
-          <div className="flex justify-center mb-8">
-            <TabsList className="grid grid-cols-3 w-[400px]">
+        <Tabs defaultValue="frontend" className="mx-auto w-full max-w-4xl">
+          <div className="mb-8 flex justify-center">
+            <TabsList className="grid w-[400px] grid-cols-3">
               <TabsTrigger value="frontend">Frontend</TabsTrigger>
               <TabsTrigger value="backend">Backend</TabsTrigger>
               <TabsTrigger value="tools">Tools</TabsTrigger>
@@ -27,8 +45,8 @@ const SkillsSection = () => {
           </div>
 
           <TabsContent value="frontend" className="animate-fadeIn">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {mockSkillsData.frontend.map((skill) => (
+            <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+              {frontendSkills.map((skill) => (
                 <SkillCard
                   key={skill.name}
                   name={skill.name}
@@ -39,8 +57,8 @@ const SkillsSection = () => {
           </TabsContent>
 
           <TabsContent value="backend" className="animate-fadeIn">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {mockSkillsData.backend.map((skill) => (
+            <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+              {backendSkills.map((skill) => (
                 <SkillCard
                   key={skill.name}
                   name={skill.name}
@@ -51,8 +69,8 @@ const SkillsSection = () => {
           </TabsContent>
 
           <TabsContent value="tools" className="animate-fadeIn">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {mockSkillsData.tools.map((skill) => (
+            <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+              {toolsSkills.map((skill) => (
                 <SkillCard
                   key={skill.name}
                   name={skill.name}
@@ -76,11 +94,11 @@ const SkillCard = ({ name, level }: SkillCardProps) => {
   return (
     <Card className="card-hover">
       <CardContent className="p-6">
-        <div className="flex justify-between items-center mb-2">
+        <div className="mb-2 flex items-center justify-between">
           <h3 className="text-lg font-semibold">{name}</h3>
-          <span className="text-sm font-medium text-primary">{level}%</span>
+          <span className="text-primary text-sm font-medium">{level}%</span>
         </div>
-        <div className="w-full bg-foreground/10 rounded-full h-2">
+        <div className="bg-foreground/10 h-2 w-full rounded-full">
           <div
             className="bg-primary h-2 rounded-full"
             style={{ width: `${level}%` }}
