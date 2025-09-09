@@ -5,64 +5,76 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { mockExperiencesData } from "@/data/user/mockExperiencesData";
+import { Experience } from "@/api/services/experience";
 
-const ExperienceSection = () => {
+const ExperienceSection = ({ experiences }: { experiences: Experience[] }) => {
   return (
     <section className="py-20" id="experience">
       <div className="container mx-auto max-lg:px-4">
-        <div className="text-center mb-12">
+        <div className="mb-12 text-center">
           <h2 className="section-title">Work Experience</h2>
-          <p className="text-lg text-foreground/70 max-w-3xl mx-auto">
+          <p className="text-foreground/70 mx-auto max-w-3xl text-lg">
             My professional journey in the web development industry. I&apos;ve
             had the opportunity to work with various technologies and teams.
           </p>
         </div>
 
-        <div className="max-w-4xl mx-auto">
+        <div className="mx-auto max-w-4xl">
           <div className="relative">
             {/* Timeline vertical line */}
-            <div className="absolute left-4 top-0 bottom-0 w-0.5 bg-primary/30 hidden md:block"></div>
+            <div className="bg-primary/30 absolute top-0 bottom-0 left-4 hidden w-0.5 md:block"></div>
 
             {/* Experience cards */}
             <div className="space-y-12">
-              {mockExperiencesData.map((exp, index) => (
-                <div key={index} className="relative">
-                  <div className="hidden md:block absolute left-0 top-6 w-8 h-8 bg-primary rounded-full z-10"></div>
-                  <div className="md:ml-16">
-                    <Card className="card-hover">
-                      <CardHeader>
-                        <div className="flex flex-wrap gap-3 justify-between items-start">
-                          <div>
-                            <CardTitle className="text-xl mb-1">
-                              {exp.title}
-                            </CardTitle>
-                            <CardDescription className="text-lg font-medium text-primary">
-                              {exp.company}
-                            </CardDescription>
-                          </div>
-                          <div className="inline-block bg-primary/10 text-primary px-4 py-1 rounded-full text-sm font-medium">
-                            {exp.period}
-                          </div>
-                        </div>
-                      </CardHeader>
-                      <CardContent>
-                        <p className="mb-4">{exp.description}</p>
-                        <div>
-                          <h4 className="font-medium mb-2">
-                            Key Responsibilities:
-                          </h4>
-                          <ul className="list-disc pl-5 space-y-1 text-foreground/80">
-                            {exp.responsibilities.map((resp, i) => (
-                              <li key={i}>{resp}</li>
-                            ))}
-                          </ul>
-                        </div>
-                      </CardContent>
-                    </Card>
-                  </div>
+              {experiences.length === 0 ? (
+                <div className="text-foreground/70 py-20 text-center">
+                  <p className="mb-2 text-xl font-medium">
+                    No work experiences added yet.
+                  </p>
+                  <p className="text-lg">
+                    I&apos;m currently building my professional journey, but
+                    feel free to check back soon for updates!
+                  </p>
                 </div>
-              ))}
+              ) : (
+                experiences.map((exp, index) => (
+                  <div key={index} className="relative">
+                    <div className="bg-primary absolute top-6 left-0 z-10 hidden h-8 w-8 rounded-full md:block"></div>
+                    <div className="md:ml-16">
+                      <Card className="card-hover">
+                        <CardHeader>
+                          <div className="flex flex-wrap items-start justify-between gap-3">
+                            <div>
+                              <CardTitle className="mb-1 text-xl">
+                                {exp.title}
+                              </CardTitle>
+                              <CardDescription className="text-primary text-lg font-medium">
+                                {exp.company}
+                              </CardDescription>
+                            </div>
+                            <div className="bg-primary/10 text-primary inline-block rounded-full px-4 py-1 text-sm font-medium">
+                              {exp.period}
+                            </div>
+                          </div>
+                        </CardHeader>
+                        <CardContent>
+                          <p className="mb-4">{exp.description}</p>
+                          <div>
+                            <h4 className="mb-2 font-medium">
+                              Key Responsibilities:
+                            </h4>
+                            <ul className="text-foreground/80 list-disc space-y-1 pl-5">
+                              {/* {exp.responsibilities.map((resp, i) => (
+                              <li key={i}>{resp}</li>
+                            ))} */}
+                            </ul>
+                          </div>
+                        </CardContent>
+                      </Card>
+                    </div>
+                  </div>
+                ))
+              )}
             </div>
           </div>
         </div>

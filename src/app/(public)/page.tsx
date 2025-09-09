@@ -5,14 +5,21 @@ import ProjectsSection from "@/sections/home/ProjectsSection";
 import ExperienceSection from "@/sections/home/ExperienceSection";
 import SkillsSection from "@/sections/home/SkillsSection";
 import AboutSection from "@/sections/home/AboutSection";
+import { getExperiences } from "@/lib/api/experience";
 
-export default function Home() {
+export default async function Home() {
+  const [experiences] = await Promise.all([
+    getExperiences(),
+    // getProjects(),
+    // getAbout(),
+  ]);
+
   return (
     <div className="space-y-10 py-4">
       <HeroSection />
       <AboutSection />
-      <SkillsSection />
-      <ExperienceSection />
+      {/* <SkillsSection /> */}
+      <ExperienceSection experiences={experiences} />
       <ProjectsSection />
       <ContactSection />
     </div>
