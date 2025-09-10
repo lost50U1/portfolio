@@ -22,8 +22,8 @@ const AboutSection = () => {
           <div className="animate-slideUp">
             <h2 className="section-title">About Me</h2>
             <p className="mb-6 text-lg">
-              Hi, I&apos;m Biruk a passionate Full Stack Web Developer with over
-              5 years of experience in creating modern, responsive, and
+              Hi, I&apos;m Biruk a passionate Frontend Web Developer with over 2
+              years of experience in creating modern, responsive, and
               user-friendly web applications.
             </p>
             <p className="mb-6">

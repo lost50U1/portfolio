@@ -83,7 +83,7 @@ export type Database = {
           category: string;
           created_at: string;
           id: string;
-          level: number;
+          icon?: string;
           name: string;
           updated_at: string;
         };
@@ -91,7 +91,7 @@ export type Database = {
           category: string;
           created_at?: string;
           id?: string;
-          level: number;
+          icon?: string;
           name: string;
           updated_at?: string;
         };
@@ -99,7 +99,7 @@ export type Database = {
           category?: string;
           created_at?: string;
           id?: string;
-          level?: number;
+          icon?: string;
           name?: string;
           updated_at?: string;
         };

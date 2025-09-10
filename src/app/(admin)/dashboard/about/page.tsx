@@ -13,13 +13,13 @@ export default function page() {
 
   // Mock about data - will be replaced with Supabase integration later
   const [aboutData, setAboutData] = useState({
-    name: "John Doe",
-    title: "Full Stack Web Developer",
-    bio: "I'm a passionate Full Stack Web Developer with over 5 years of experience in creating modern, responsive, and user-friendly web applications. My journey in web development started with front-end technologies like HTML, CSS, and JavaScript. Over time, I expanded my skills to include React, TypeScript, Node.js, and various database solutions.",
-    location: "San Francisco, CA",
-    email: "john.doe@example.com",
-    education: "B.S. Computer Science, Stanford University",
-    availableForWork: true,
+    name: "John Doe", // i might remove this
+    title: "Full Stack Web Developer", // i might remove this
+    bio: "I'm a passionate Full Stack Web Developer with over 5 years of experience in creating modern, responsive, and user-friendly web applications. My journey in web development started with front-end technologies like HTML, CSS, and JavaScript. Over time, I expanded my skills to include React, TypeScript, Node.js, and various database solutions.", // i might remove this
+    location: "San Francisco, CA", // i might remove this
+    email: "john.doe@example.com", // i might remove this
+    education: "B.S. Computer Science, Stanford University", // i might remove this
+    availableForWork: true, // i might remove this
   });
 
   const handleSave = async () => {

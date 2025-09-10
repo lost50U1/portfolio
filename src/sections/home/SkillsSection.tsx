@@ -1,21 +1,11 @@
 "use client";
 
-import { fetchSkills } from "@/api/services/skills";
 import { Card, CardContent } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { useQuery } from "@tanstack/react-query";
+import { PackageOpen } from "lucide-react";
+import Image from "next/image";
 
-const SkillsSection = () => {
-  // Fetch skills data
-  const {
-    data: skills = [],
-    isLoading,
-    error,
-  } = useQuery({
-    queryKey: ["skills"],
-    queryFn: fetchSkills,
-  });
-
+const SkillsSection = ({ skills }: { skills: Skill[] }) => {
   // Filter skills by category
   const frontendSkills = skills.filter(
     (skill) => skill.category === "Frontend",
@@ -45,39 +35,15 @@ const SkillsSection = () => {
           </div>
 
           <TabsContent value="frontend" className="animate-fadeIn">
-            <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
-              {frontendSkills.map((skill) => (
-                <SkillCard
-                  key={skill.name}
-                  name={skill.name}
-                  level={skill.level}
-                />
-              ))}
-            </div>
+            <SkillGrid skills={frontendSkills} />
           </TabsContent>
 
           <TabsContent value="backend" className="animate-fadeIn">
-            <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
-              {backendSkills.map((skill) => (
-                <SkillCard
-                  key={skill.name}
-                  name={skill.name}
-                  level={skill.level}
-                />
-              ))}
-            </div>
+            <SkillGrid skills={backendSkills} />
           </TabsContent>
 
           <TabsContent value="tools" className="animate-fadeIn">
-            <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
-              {toolsSkills.map((skill) => (
-                <SkillCard
-                  key={skill.name}
-                  name={skill.name}
-                  level={skill.level}
-                />
-              ))}
-            </div>
+            <SkillGrid skills={toolsSkills} />
           </TabsContent>
         </Tabs>
       </div>
@@ -85,25 +51,53 @@ const SkillsSection = () => {
   );
 };
 
-interface SkillCardProps {
+interface Skill {
+  category: string;
   name: string;
-  level: number;
+  icon?: string; // assume your API returns an icon url or name
 }
 
-const SkillCard = ({ name, level }: SkillCardProps) => {
+const SkillGrid = ({ skills }: { skills: Skill[] }) => {
+  if (!skills.length) {
+    return (
+      <div className="text-muted-foreground flex flex-col items-center justify-center py-12 text-center">
+        <PackageOpen className="text-primary mb-4 h-12 w-12" />
+        <h3 className="text-lg font-semibold">No skills found</h3>
+        <p className="mt-1 text-sm">
+          Skills for this category will appear here once they are added.
+        </p>
+      </div>
+    );
+  }
+
+  return (
+    <div className="grid grid-cols-2 gap-6 md:grid-cols-3">
+      {skills.map((skill) => (
+        <SkillCard key={skill.name} name={skill.name} icon={skill.icon} />
+      ))}
+    </div>
+  );
+};
+
+interface SkillCardProps {
+  name: string;
+  icon?: string;
+}
+
+const SkillCard = ({ name, icon }: SkillCardProps) => {
   return (
     <Card className="card-hover">
-      <CardContent className="p-6">
-        <div className="mb-2 flex items-center justify-between">
-          <h3 className="text-lg font-semibold">{name}</h3>
-          <span className="text-primary text-sm font-medium">{level}%</span>
-        </div>
-        <div className="bg-foreground/10 h-2 w-full rounded-full">
-          <div
-            className="bg-primary h-2 rounded-full"
-            style={{ width: `${level}%` }}
-          ></div>
-        </div>
+      <CardContent className="flex items-center gap-4 p-6">
+        {icon && (
+          <Image
+            src={icon}
+            alt={name}
+            width={32}
+            height={32}
+            className="h-8 w-8 object-contain"
+          />
+        )}
+        <h3 className="text-lg font-medium">{name}</h3>
       </CardContent>
     </Card>
   );

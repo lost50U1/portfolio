@@ -5,24 +5,6 @@ import { Edit, Loader2, Plus, Trash } from "lucide-react";
 import { z } from "zod";
 import { skillSchema } from "@/schemas/dashboard/skills.schema";
 import { Button } from "@/components/ui/button";
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-} from "@/components/ui/dialog";
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "@/components/ui/form";
-import { Slider } from "@radix-ui/react-slider";
-import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import {
   createSkill,
@@ -37,6 +19,7 @@ import { toast } from "sonner";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Progress } from "@/components/ui/progress";
+import { ManageSkillsModal } from "@/components/dashboard/skills/ManageSkillsModal";
 
 type SkillFormData = z.infer<typeof skillSchema>;
 
@@ -103,7 +86,6 @@ export default function SkillsPage() {
     resolver: zodResolver(skillSchema),
     defaultValues: {
       name: "",
-      level: 75,
       category: "",
     },
   });
@@ -113,7 +95,6 @@ export default function SkillsPage() {
     setEditingSkill(skill);
     form.reset({
       name: skill.name,
-      level: skill.level,
       category: skill.category,
     });
     setIsDialogOpen(true);
@@ -124,7 +105,6 @@ export default function SkillsPage() {
     setEditingSkill(null);
     form.reset({
       name: "",
-      level: 75,
       category: "",
     });
     setIsDialogOpen(true);
@@ -135,7 +115,6 @@ export default function SkillsPage() {
     // Ensure all required fields are present
     const skillData: SkillInsert = {
       name: data.name,
-      level: data.level,
       category: data.category,
     };
 
@@ -207,12 +186,6 @@ export default function SkillsPage() {
                     </Button>
                   </div>
                 </CardHeader>
-                <CardContent>
-                  <div className="mb-1.5 flex items-center justify-between">
-                    <span className="text-sm font-medium">{skill.level}%</span>
-                  </div>
-                  <Progress value={skill.level} className="h-2" />
-                </CardContent>
               </Card>
             ))}
           </div>
@@ -220,106 +193,14 @@ export default function SkillsPage() {
       </div>
 
       {/* Add/Edit Skill Dialog */}
-      <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
-        <DialogContent className="sm:max-w-[425px]">
-          <DialogHeader>
-            <DialogTitle>
-              {editingSkill ? "Edit Skill" : "Add New Skill"}
-            </DialogTitle>
-            <DialogDescription>
-              {editingSkill
-                ? "Make changes to your skill here."
-                : "Add details about a new skill to showcase."}
-            </DialogDescription>
-          </DialogHeader>
-
-          <Form {...form}>
-            <form
-              onSubmit={form.handleSubmit(onSubmit)}
-              className="space-y-4 pt-2"
-            >
-              <FormField
-                control={form.control}
-                name="name"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Skill Name</FormLabel>
-                    <FormControl>
-                      <Input {...field} placeholder="React, TypeScript, etc." />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-
-              <FormField
-                control={form.control}
-                name="category"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Category</FormLabel>
-                    <FormControl>
-                      <Input
-                        {...field}
-                        placeholder="Frontend, Backend, DevOps, etc."
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-
-              <FormField
-                control={form.control}
-                name="level"
-                render={({ field: { value, onChange } }) => (
-                  <FormItem>
-                    <div className="flex items-center justify-between">
-                      <FormLabel>Proficiency Level</FormLabel>
-                      <span className="text-sm">{value}%</span>
-                    </div>
-                    <FormControl>
-                      <Slider
-                        min={1}
-                        max={100}
-                        step={1}
-                        value={[value]}
-                        onValueChange={(vals) => onChange(vals[0])}
-                        className="py-4"
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-
-              <DialogFooter className="pt-2">
-                <Button
-                  variant="outline"
-                  type="button"
-                  onClick={() => setIsDialogOpen(false)}
-                  disabled={
-                    createMutation.isPending || updateMutation.isPending
-                  }
-                >
-                  Cancel
-                </Button>
-                <Button
-                  type="submit"
-                  disabled={
-                    createMutation.isPending || updateMutation.isPending
-                  }
-                >
-                  {(createMutation.isPending || updateMutation.isPending) && (
-                    <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                  )}
-                  {editingSkill ? "Save Changes" : "Add Skill"}
-                </Button>
-              </DialogFooter>
-            </form>
-          </Form>
-        </DialogContent>
-      </Dialog>
+      <ManageSkillsModal
+        isDialogOpen={isDialogOpen}
+        editingSkill={editingSkill}
+        onClose={() => setIsDialogOpen(false)}
+        onSubmit={onSubmit}
+        form={form}
+        isSubmitting={createMutation.isPending || updateMutation.isPending}
+      />
     </>
   );
 }
