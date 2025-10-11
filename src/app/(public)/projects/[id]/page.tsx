@@ -55,11 +55,11 @@ export default async function Project({
               {project.title}
             </h1>
             <div className="mb-8 flex flex-wrap justify-center gap-2">
-              {project.technologies.map((tech) => (
+              {/* {project.technologies.map((tech) => (
                 <Badge key={tech} variant="secondary" className="text-sm">
                   {tech}
                 </Badge>
-              ))}
+              ))} */}
             </div>
           </div>
         </div>
@@ -89,11 +89,11 @@ export default async function Project({
 
               <h2 className="mb-6 text-2xl font-semibold">Features</h2>
               <ul className="mb-8 list-disc space-y-2 pl-6">
-                {project.features.map((feature, index) => (
+                {/* {project.features.map((feature, index) => (
                   <li key={index} className="text-foreground/80">
                     {feature}
                   </li>
-                ))}
+                ))} */}
               </ul>
 
               <div className="mb-8 grid grid-cols-1 gap-8 md:grid-cols-2">
@@ -124,11 +124,11 @@ export default async function Project({
                       TECHNOLOGIES
                     </h4>
                     <div className="mt-1 flex flex-wrap gap-2">
-                      {project.technologies.map((tech) => (
+                      {/* {project.technologies.map((tech) => (
                         <span key={tech} className="text-sm">
                           {tech}
                         </span>
-                      ))}
+                      ))} */}
                     </div>
                   </div>
                 </div>
