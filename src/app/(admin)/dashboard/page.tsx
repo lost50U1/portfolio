@@ -79,7 +79,7 @@ export default function Dashboard() {
         />
       </div>
 
-      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+      {/* <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
         <StatsCard
           title="Total Visitors"
           value={statsData.totalVisitors}
@@ -109,11 +109,11 @@ export default function Dashboard() {
           trend="neutral"
           trendValue="Same as last month"
         />
-      </div>
+      </div> */}
 
-      <div>
+      {/* <div>
         <VisitorsChart />
-      </div>
+      </div> */}
     </div>
   );
 }

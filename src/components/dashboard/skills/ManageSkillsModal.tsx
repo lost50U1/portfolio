@@ -21,6 +21,13 @@ import { Slider } from "@/components/ui/slider";
 import { Button } from "@/components/ui/button";
 import { Skill } from "@/api/services/skills";
 import { Loader2 } from "lucide-react";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectValue,
+} from "@/components/ui/select";
+import { SelectTrigger } from "@radix-ui/react-select";
 
 interface ManageSkillsModalProps {
   isDialogOpen: boolean;
@@ -79,10 +86,20 @@ export const ManageSkillsModal = ({
                 <FormItem>
                   <FormLabel>Category</FormLabel>
                   <FormControl>
-                    <Input
+                    {/* <Input
                       {...field}
                       placeholder="Frontend, Backend, DevOps, etc."
-                    />
+                    /> */}
+                    <Select {...field}>
+                      <SelectTrigger>
+                        <SelectValue placeholder="Frontend, Backend, DevOps, etc." />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="frontend">Frontend</SelectItem>
+                        <SelectItem value="Backend">Backend</SelectItem>
+                        <SelectItem value="tools">Tools</SelectItem>
+                      </SelectContent>
+                    </Select>
                   </FormControl>
                   <FormMessage />
                 </FormItem>

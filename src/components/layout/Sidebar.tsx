@@ -16,12 +16,12 @@ import {
 import Link from "next/link";
 import {
   LayoutDashboard,
-  Briefcase,
-  Award,
-  BookOpen,
-  User,
-  Mail,
-  Settings,
+  // Briefcase,
+  // Award,
+  // BookOpen,
+  // User,
+  // Mail,
+  // Settings,
   Home,
   LogOut,
 } from "lucide-react";
@@ -36,36 +36,36 @@ export const menuItems = [
     icon: <LayoutDashboard size={20} />,
     path: "/dashboard",
   },
-  {
-    name: "Projects",
-    icon: <Briefcase size={20} />,
-    path: "/dashboard/projects",
-  },
-  {
-    name: "Experience",
-    icon: <Award size={20} />,
-    path: "/dashboard/experience",
-  },
-  {
-    name: "Skills",
-    icon: <BookOpen size={20} />,
-    path: "/dashboard/skills",
-  },
-  {
-    name: "About",
-    icon: <User size={20} />,
-    path: "/dashboard/about",
-  },
-  {
-    name: "Messages",
-    icon: <Mail size={20} />,
-    path: "/dashboard/messages",
-  },
-  {
-    name: "Settings",
-    icon: <Settings size={20} />,
-    path: "/dashboard/settings",
-  },
+  // {
+  //   name: "Projects",
+  //   icon: <Briefcase size={20} />,
+  //   path: "/dashboard/projects",
+  // },
+  // {
+  //   name: "Experience",
+  //   icon: <Award size={20} />,
+  //   path: "/dashboard/experience",
+  // },
+  // {
+  //   name: "Skills",
+  //   icon: <BookOpen size={20} />,
+  //   path: "/dashboard/skills",
+  // },
+  // {
+  //   name: "About",
+  //   icon: <User size={20} />,
+  //   path: "/dashboard/about",
+  // },
+  // {
+  //   name: "Messages",
+  //   icon: <Mail size={20} />,
+  //   path: "/dashboard/messages",
+  // },
+  // {
+  //   name: "Settings",
+  //   icon: <Settings size={20} />,
+  //   path: "/dashboard/settings",
+  // },
 ];
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {

@@ -29,16 +29,16 @@ const Header = () => {
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 max-sm:px-4 ${
+      className={`fixed top-0 right-0 left-0 z-50 transition-all duration-300 max-sm:px-4 ${
         isScrolled
-          ? "bg-background/95 backdrop-blur-sm border-b border-border shadow-md py-3"
+          ? "bg-background/95 border-border border-b py-3 shadow-md backdrop-blur-sm"
           : "bg-transparent py-5"
       }`}
     >
       <div className="container mx-auto flex items-center justify-between">
         <Link
           href="/"
-          className="text-2xl font-heading font-bold text-foreground"
+          className="font-heading text-foreground text-2xl font-bold"
         >
           Biruk&apos;s<span className="text-primary">Portfolio</span>
         </Link>
@@ -54,7 +54,7 @@ const Header = () => {
                 <li key={item}>
                   <Link
                     href={href}
-                    className="text-foreground hover:text-primary font-medium transition-colors"
+                    className="text-foreground hover:text-primary after:bg-primary relative font-medium transition-colors after:absolute after:-bottom-1 after:left-0 after:h-[2px] after:w-0 after:transition-all after:duration-300 after:content-[''] hover:after:w-full"
                   >
                     {item}
                   </Link>
@@ -69,7 +69,7 @@ const Header = () => {
 
           {/* Mobile menu button */}
           <button
-            className="md:hidden text-foreground"
+            className="text-foreground md:hidden"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
           >
             {mobileMenuOpen ? (
@@ -78,7 +78,7 @@ const Header = () => {
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
-                className="w-6 h-6"
+                className="h-6 w-6"
               >
                 <path
                   strokeLinecap="round"
@@ -93,7 +93,7 @@ const Header = () => {
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
-                className="w-6 h-6"
+                className="h-6 w-6"
               >
                 <path
                   strokeLinecap="round"
@@ -109,8 +109,8 @@ const Header = () => {
 
       {/* Mobile Navigation */}
       {mobileMenuOpen && (
-        <div className="md:hidden absolute top-full left-0 right-0 bg-background border-y border-border shadow-lg py-4 animate-fadeIn px-4">
-          <ul className="flex flex-col space-y-3 container">
+        <div className="bg-background border-border animate-fadeIn absolute top-full right-0 left-0 border-y px-4 py-4 shadow-lg md:hidden">
+          <ul className="container flex flex-col space-y-3">
             {navItems.map((item) => {
               const hash = `#${item.toLowerCase()}`;
               const href = pathname === "/" ? hash : `/${hash}`;
@@ -119,7 +119,7 @@ const Header = () => {
                 <li key={item}>
                   <Link
                     href={href}
-                    className="text-foreground hover:text-primary font-medium transition-colors block py-2"
+                    className="text-foreground hover:text-primary block py-2 font-medium transition-colors"
                     onClick={() => setMobileMenuOpen(false)}
                   >
                     {item}

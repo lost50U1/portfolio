@@ -10,8 +10,8 @@
 export const navItems = [
   "Home",
   "About",
-  "Skills",
-  "Experience",
-  "Projects",
+  // "Skills",
+  // "Experience",
+  // "Projects",
   "Contact",
 ];

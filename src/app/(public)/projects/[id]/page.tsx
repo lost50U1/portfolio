@@ -1,6 +1,7 @@
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { mockProjectsData } from "@/data/user/mockProjectsData";
+import { getProjects } from "@/lib/api/project";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
@@ -14,7 +15,9 @@ export default async function Project({
 
   const projectId = parseInt(id || "0", 10);
 
-  const project = mockProjectsData.find((p) => p.id === projectId);
+  const [projects] = await Promise.all([getProjects()]);
+
+  const project = projects.find((p) => p.id === projectId);
 
   if (!project) {
     return (
@@ -36,7 +39,7 @@ export default async function Project({
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                className="h-5 w-5 mr-2"
+                className="mr-2 h-5 w-5"
                 viewBox="0 0 20 20"
                 fill="currentColor"
               >
@@ -48,10 +51,10 @@ export default async function Project({
               </svg>
               Back to Projects
             </Link>
-            <h1 className="text-4xl md:text-5xl font-bold mb-6 text-center">
+            <h1 className="mb-6 text-center text-4xl font-bold md:text-5xl">
               {project.title}
             </h1>
-            <div className="flex flex-wrap justify-center gap-2 mb-8">
+            <div className="mb-8 flex flex-wrap justify-center gap-2">
               {project.technologies.map((tech) => (
                 <Badge key={tech} variant="secondary" className="text-sm">
                   {tech}
@@ -69,7 +72,7 @@ export default async function Project({
             <Image
               src={project.image}
               alt={project.title}
-              className="w-full h-auto rounded-lg object-cover"
+              className="h-auto w-full rounded-lg object-cover"
               style={{ maxHeight: "500px" }}
             />
           </div>
@@ -79,13 +82,13 @@ export default async function Project({
       {/* Project Details */}
       <section className="py-12">
         <div className="container mx-auto">
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
+          <div className="grid grid-cols-1 gap-12 lg:grid-cols-3">
             <div className="lg:col-span-2">
-              <h2 className="text-2xl font-semibold mb-6">Project Overview</h2>
+              <h2 className="mb-6 text-2xl font-semibold">Project Overview</h2>
               <p className="mb-8 text-lg">{project.longDescription}</p>
 
-              <h2 className="text-2xl font-semibold mb-6">Features</h2>
-              <ul className="list-disc pl-6 mb-8 space-y-2">
+              <h2 className="mb-6 text-2xl font-semibold">Features</h2>
+              <ul className="mb-8 list-disc space-y-2 pl-6">
                 {project.features.map((feature, index) => (
                   <li key={index} className="text-foreground/80">
                     {feature}
@@ -93,34 +96,34 @@ export default async function Project({
                 ))}
               </ul>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+              <div className="mb-8 grid grid-cols-1 gap-8 md:grid-cols-2">
                 <div>
-                  <h2 className="text-xl font-semibold mb-4">Challenges</h2>
+                  <h2 className="mb-4 text-xl font-semibold">Challenges</h2>
                   <p>{project.challenges}</p>
                 </div>
                 <div>
-                  <h2 className="text-xl font-semibold mb-4">Solution</h2>
+                  <h2 className="mb-4 text-xl font-semibold">Solution</h2>
                   <p>{project.solution}</p>
                 </div>
               </div>
             </div>
 
             <div className="lg:col-span-1">
-              <div className="border-border border rounded-xl shadow-lg p-6">
-                <h3 className="text-xl font-semibold mb-4">Project Details</h3>
+              <div className="border-border rounded-xl border p-6 shadow-lg">
+                <h3 className="mb-4 text-xl font-semibold">Project Details</h3>
 
-                <div className="space-y-4 mb-6">
+                <div className="mb-6 space-y-4">
                   <div>
-                    <h4 className="font-medium text-sm text-foreground/60">
+                    <h4 className="text-foreground/60 text-sm font-medium">
                       PROJECT TYPE
                     </h4>
                     <p className="capitalize">{project.category}</p>
                   </div>
                   <div>
-                    <h4 className="font-medium text-sm text-foreground/60">
+                    <h4 className="text-foreground/60 text-sm font-medium">
                       TECHNOLOGIES
                     </h4>
-                    <div className="flex flex-wrap gap-2 mt-1">
+                    <div className="mt-1 flex flex-wrap gap-2">
                       {project.technologies.map((tech) => (
                         <span key={tech} className="text-sm">
                           {tech}
@@ -150,8 +153,8 @@ export default async function Project({
                 </div>
               </div>
 
-              <div className="border-border border rounded-xl shadow-lg p-6 mt-8">
-                <h3 className="text-xl font-semibold mb-4">
+              <div className="border-border mt-8 rounded-xl border p-6 shadow-lg">
+                <h3 className="mb-4 text-xl font-semibold">
                   Need Something Similar?
                 </h3>
                 <p className="mb-6">

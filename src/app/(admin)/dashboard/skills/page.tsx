@@ -159,35 +159,46 @@ export default function SkillsPage() {
             <Loader2 className="text-primary h-8 w-8 animate-spin" />
           </div>
         ) : (
-          <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
-            {skills.map((skill) => (
-              <Card key={skill.id}>
-                <CardHeader className="flex flex-row items-start justify-between space-y-0 pb-2">
-                  <div>
-                    <CardTitle className="text-lg">{skill.name}</CardTitle>
-                    <p className="text-muted-foreground text-sm">
-                      {skill.category}
-                    </p>
-                  </div>
-                  <div className="flex space-x-1">
-                    <Button
-                      variant="ghost"
-                      size="icon"
-                      onClick={() => openEditDialog(skill)}
-                    >
-                      <Edit className="h-4 w-4" />
-                    </Button>
-                    <Button
-                      variant="ghost"
-                      size="icon"
-                      onClick={() => handleDeleteSkill(skill.id)}
-                    >
-                      <Trash className="h-4 w-4" />
-                    </Button>
-                  </div>
-                </CardHeader>
+          <div>
+            {skills.length === 0 ? (
+              <Card>
+                <CardContent className="flex flex-col items-center justify-center p-12">
+                  <p className="text-muted-foreground mb-4">No skills found</p>
+                  <Button onClick={openAddDialog}>Add Your First Skill</Button>
+                </CardContent>
               </Card>
-            ))}
+            ) : (
+              <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
+                {skills.map((skill) => (
+                  <Card key={skill.id}>
+                    <CardHeader className="flex flex-row items-start justify-between space-y-0 pb-2">
+                      <div>
+                        <CardTitle className="text-lg">{skill.name}</CardTitle>
+                        <p className="text-muted-foreground text-sm">
+                          {skill.category}
+                        </p>
+                      </div>
+                      <div className="flex space-x-1">
+                        <Button
+                          variant="ghost"
+                          size="icon"
+                          onClick={() => openEditDialog(skill)}
+                        >
+                          <Edit className="h-4 w-4" />
+                        </Button>
+                        <Button
+                          variant="ghost"
+                          size="icon"
+                          onClick={() => handleDeleteSkill(skill.id)}
+                        >
+                          <Trash className="h-4 w-4" />
+                        </Button>
+                      </div>
+                    </CardHeader>
+                  </Card>
+                ))}
+              </div>
+            )}
           </div>
         )}
       </div>
