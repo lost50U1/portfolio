@@ -1,8 +1,9 @@
 "use client";
 
 import React from "react";
-import { Activity, Users, BarChart, Layers, Eye } from "lucide-react";
-import { VisitorsChart } from "@/components/dashboard/VisitorsChart";
+// import { Activity, Users, BarChart, Layers, Eye } from "lucide-react";
+import { Activity, BarChart, Layers, Eye } from "lucide-react";
+// import { VisitorsChart } from "@/components/dashboard/VisitorsChart";
 import { StatsCard } from "@/components/dashboard/StatsCard";
 import { useQuery } from "@tanstack/react-query";
 import { fetchSkills } from "@/api/services/skills";
@@ -34,12 +35,12 @@ export default function Dashboard() {
   });
 
   // todo: change this with real data
-  const statsData = {
-    totalVisitors: "3,721",
-    dailyAverage: "148",
-    projectViews: "1,254",
-    conversionRate: "2.8%",
-  };
+  // const statsData = {
+  //   totalVisitors: "3,721",
+  //   dailyAverage: "148",
+  //   projectViews: "1,254",
+  //   conversionRate: "2.8%",
+  // };
 
   return (
     <div className="w-full space-y-4 sm:space-y-6">

@@ -4,12 +4,14 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { Loader2, Save, Upload } from "lucide-react";
+// import { Loader2, Save, Upload } from "lucide-react";
+import { Upload } from "lucide-react";
+import Image from "next/image";
 import { useState } from "react";
-import { toast } from "sonner";
+// import { toast } from "sonner";
 
-export default function page() {
-  const [isLoading, setIsLoading] = useState(false);
+export default function AboutPage() {
+  // const [isLoading, setIsLoading] = useState(false);
 
   // Mock about data - will be replaced with Supabase integration later
   const [aboutData, setAboutData] = useState({
@@ -22,20 +24,20 @@ export default function page() {
     availableForWork: true, // i might remove this
   });
 
-  const handleSave = async () => {
-    setIsLoading(true);
-    try {
-      // TODO: Implement Supabase save functionality
-      await new Promise((resolve) => setTimeout(resolve, 1000)); // Mock delay
-      toast("Success", {
-        description: "About information has been saved successfully.",
-      });
-    } catch (error) {
-      toast.error("Failed to save about information. Please try again.");
-    } finally {
-      setIsLoading(false);
-    }
-  };
+  // const handleSave = async () => {
+  //   setIsLoading(true);
+  //   try {
+  //     // TODO: Implement Supabase save functionality
+  //     await new Promise((resolve) => setTimeout(resolve, 1000)); // Mock delay
+  //     toast("Success", {
+  //       description: "About information has been saved successfully.",
+  //     });
+  //   } catch (error) {
+  //     toast.error("Failed to save about information. Please try again.");
+  //   } finally {
+  //     setIsLoading(false);
+  //   }
+  // };
 
   return (
     <div className="space-y-6">
@@ -54,7 +56,7 @@ export default function page() {
           <CardContent>
             <div className="flex flex-col items-center space-y-4">
               <div className="bg-secondary h-32 w-32 overflow-hidden rounded-full">
-                <img
+                <Image
                   src="https://images.unsplash.com/photo-1629904853716-f0bc54eea481?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80"
                   alt="Profile"
                   className="h-full w-full object-cover"
@@ -143,14 +145,14 @@ export default function page() {
         <Card>
           <CardHeader className="flex flex-row items-center justify-between">
             <CardTitle>Bio</CardTitle>
-            <Button size="sm" onClick={handleSave} disabled={isLoading}>
+            {/* <Button size="sm" onClick={handleSave} disabled={isLoading}>
               {isLoading ? (
                 <Loader2 className="mr-2 h-4 w-4 animate-spin" />
               ) : (
                 <Save className="mr-2 h-4 w-4" />
               )}
               Save Changes
-            </Button>
+            </Button> */}
           </CardHeader>
           <CardContent>
             <Textarea

@@ -1,5 +1,5 @@
 import React from "react";
-import { UseFormReturn } from "react-hook-form";
+import { FieldValues, Path, UseFormReturn } from "react-hook-form";
 import {
   Dialog,
   DialogContent,
@@ -17,7 +17,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { Slider } from "@/components/ui/slider";
+// import { Slider } from "@/components/ui/slider";
 import { Button } from "@/components/ui/button";
 import { Skill } from "@/api/services/skills";
 import { Loader2 } from "lucide-react";
@@ -29,23 +29,23 @@ import {
 } from "@/components/ui/select";
 import { SelectTrigger } from "@radix-ui/react-select";
 
-interface ManageSkillsModalProps {
+interface ManageSkillsModalProps<T extends FieldValues> {
   isDialogOpen: boolean;
   onClose: () => void;
   editingSkill: Skill | null;
-  form: UseFormReturn<any>;
-  onSubmit: (data: any) => void;
+  form: UseFormReturn<T>;
+  onSubmit: (data: T) => void;
   isSubmitting?: boolean;
 }
 
-export const ManageSkillsModal = ({
+export const ManageSkillsModal = <T extends FieldValues> ({
   isDialogOpen,
   onClose,
   editingSkill,
   form,
   onSubmit,
   isSubmitting,
-}: ManageSkillsModalProps) => {
+}: ManageSkillsModalProps<T>) => {
   return (
     <Dialog open={isDialogOpen} onOpenChange={(open) => !open && onClose()}>
       <DialogContent className="sm:max-w-[425px]">
@@ -67,7 +67,7 @@ export const ManageSkillsModal = ({
           >
             <FormField
               control={form.control}
-              name="name"
+              name={"name" as Path<T>}
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>Skill Name</FormLabel>
@@ -81,7 +81,7 @@ export const ManageSkillsModal = ({
 
             <FormField
               control={form.control}
-              name="category"
+              name={"category" as Path<T>}
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>Category</FormLabel>

@@ -19,25 +19,25 @@ import {
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Loader2 } from "lucide-react";
-import { UseFormReturn } from "react-hook-form";
+import { FieldValues, Path, UseFormReturn } from "react-hook-form";
 
-interface ManageExperienceModalProps {
+interface ManageExperienceModalProps<T extends FieldValues> {
   isDialogOpen: boolean;
   onClose: () => void;
   editingExperience: Experience | null;
-  form: UseFormReturn<any>;
-  onSubmit: (data: any) => void;
+  form: UseFormReturn<T>;
+  onSubmit: (data: T) => void;
   isSubmitting?: boolean;
 }
 
-export const ManageExperienceModal = ({
+export const ManageExperienceModal = <T extends FieldValues> ({
   isDialogOpen,
   onClose,
   editingExperience,
   form,
   onSubmit,
   isSubmitting,
-}: ManageExperienceModalProps) => {
+}: ManageExperienceModalProps<T>) => {
   return (
     <Dialog open={isDialogOpen} onOpenChange={(open) => !open && onClose()}>
       <DialogContent className="sm:max-w-[500px]">
@@ -59,7 +59,7 @@ export const ManageExperienceModal = ({
           >
             <FormField
               control={form.control}
-              name="title"
+              name={"title" as Path<T>}
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>Job Title</FormLabel>
@@ -74,7 +74,7 @@ export const ManageExperienceModal = ({
             <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
               <FormField
                 control={form.control}
-                name="company"
+                name={"company" as Path<T>}
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel>Company</FormLabel>
@@ -88,7 +88,7 @@ export const ManageExperienceModal = ({
 
               <FormField
                 control={form.control}
-                name="location"
+                name={"location" as Path<T>}
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel>Location</FormLabel>
@@ -103,7 +103,7 @@ export const ManageExperienceModal = ({
 
             <FormField
               control={form.control}
-              name="period"
+              name={"period" as Path<T>}
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>Period</FormLabel>
@@ -117,7 +117,7 @@ export const ManageExperienceModal = ({
 
             <FormField
               control={form.control}
-              name="description"
+              name={"description" as Path<T>}
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>Description</FormLabel>

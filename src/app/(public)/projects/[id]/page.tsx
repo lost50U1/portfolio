@@ -1,6 +1,6 @@
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { mockProjectsData } from "@/data/user/mockProjectsData";
+// import { mockProjectsData } from "@/data/user/mockProjectsData";
 import { getProjects } from "@/lib/api/project";
 import Image from "next/image";
 import Link from "next/link";

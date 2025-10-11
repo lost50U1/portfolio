@@ -1,6 +1,6 @@
 "use client";
 
-import { ReactNode, useState } from "react";
+import { ReactNode } from "react";
 import { ThemeProvider } from "@/providers/ThemeProvider";
 import { Toaster } from "@/components/ui/sonner";
 import { ReactQueryClientProvider } from "./ReactQueryClientProvider";

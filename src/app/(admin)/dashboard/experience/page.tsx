@@ -22,7 +22,7 @@ import { ManageExperienceModal } from "@/components/dashboard/experience/ManageE
 
 type ExperienceFormData = z.infer<typeof experienceSchema>;
 
-export default function page() {
+export default function ExperiencePage() {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [editingExperience, setEditingExperience] = useState<Experience | null>(
     null,
@@ -33,7 +33,7 @@ export default function page() {
   const {
     data: experiences = [],
     isLoading,
-    error,
+    // error,
   } = useQuery({
     queryKey: ["experiences"],
     queryFn: fetchExperiences,
@@ -229,7 +229,7 @@ export default function page() {
         )}
       </div>
       {/* Add/Edit Experience Dialog */}
-      <ManageExperienceModal
+      <ManageExperienceModal<ExperienceFormData>
         isDialogOpen={isDialogOpen}
         editingExperience={editingExperience}
         onClose={() => setIsDialogOpen(false)}

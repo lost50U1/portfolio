@@ -45,10 +45,11 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { projectSchema } from "@/schemas/dashboard/projects.schema";
 import { z } from "zod";
+import Image from "next/image";
 
 type ProjectFormData = z.infer<typeof projectSchema>;
 
-export default function page() {
+export default function ProjectsPage() {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [editingProject, setEditingProject] = useState<Project | null>(null);
   const queryClient = useQueryClient();
@@ -60,7 +61,7 @@ export default function page() {
   const {
     data: projects = [],
     isLoading,
-    error,
+    // error,
   } = useQuery({
     queryKey: ["projects"],
     queryFn: fetchProjects,
@@ -318,7 +319,7 @@ export default function page() {
                 <Card className="w-full overflow-hidden">
                   <div className="flex flex-col">
                     <div className="h-48 w-full overflow-hidden sm:h-32">
-                      <img
+                      <Image
                         src={project.image}
                         alt={project.title}
                         className="h-full w-full object-cover"

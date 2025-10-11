@@ -25,7 +25,7 @@ interface Message {
   archived: boolean;
 }
 
-export default function page() {
+export default function MessagesPage() {
   const [tab, setTab] = useState("inbox");
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedMessage, setSelectedMessage] = useState<Message | null>(null);

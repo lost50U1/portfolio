@@ -18,7 +18,7 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Progress } from "@/components/ui/progress";
+// import { Progress } from "@/components/ui/progress";
 import { ManageSkillsModal } from "@/components/dashboard/skills/ManageSkillsModal";
 
 type SkillFormData = z.infer<typeof skillSchema>;
@@ -32,7 +32,7 @@ export default function SkillsPage() {
   const {
     data: skills = [],
     isLoading,
-    error,
+    // error,
   } = useQuery({
     queryKey: ["skills"],
     queryFn: fetchSkills,
@@ -204,7 +204,7 @@ export default function SkillsPage() {
       </div>
 
       {/* Add/Edit Skill Dialog */}
-      <ManageSkillsModal
+      <ManageSkillsModal<SkillFormData>
         isDialogOpen={isDialogOpen}
         editingSkill={editingSkill}
         onClose={() => setIsDialogOpen(false)}
